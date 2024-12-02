@@ -288,63 +288,6 @@
     </collision>
   </link>
 
-
-  <!-- base_joint fixes base_link to the environment -->
-  <!-- <joint name="base_joint" type="fixed"> -->
-  <!--   <parent link="world"/> -->
-  <!--   <child link="base_link"/> -->
-  <!--   <origin xyz="0 0 0" rpy="0 0 0"/> -->
-  <!--   <axis xyz="0 0 1"/> -->
-  <!-- </joint> -->
-
-  <!-- joints - main serial chain -->
-  <!-- <joint name="joint_1" type="revolute">
-    <parent link="base_link"/>
-    <child link="link_1"/>
-    <origin xyz="0 0 0.061584" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
-  </joint>
-
-  <joint name="joint_2" type="revolute">
-    <parent link="link_1"/>
-    <child link="link_2"/>
-    <origin xyz="-0.101717 0 0.182284" rpy="${-pi/2} -${pi/3} ${pi/2}"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
-  </joint>
-
-  <joint name="joint_3" type="revolute">
-    <parent link="link_2"/>
-    <child link="link_3"/>
-    <origin xyz="0.685682 0 0.041861" rpy="0 ${pi} ${pi+pi/2}"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
-  </joint>
-
-  <joint name="joint_4" type="revolute">
-    <parent link="link_3"/>
-    <child link="link_4"/>
-    <origin xyz="0.518777 0 0.067458" rpy="0 ${pi} ${pi+pi/6}"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
-  </joint>
-
-  <joint name="joint_5" type="revolute">
-    <parent link="link_4"/>
-    <child link="link_5"/>
-    <origin xyz="0.112654 0 0.110903" rpy="${pi/2} ${pi} ${pi/2}"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
-  </joint>
-
-  <joint name="joint_6" type="revolute">
-    <parent link="link_5"/>
-    <child link="link_6"/>
-    <origin xyz="-0.085976 0 0.133436" rpy="0 ${-pi/2} 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
-  </joint> -->
   <joint
     name="joint_1"
     type="prismatic">
@@ -361,7 +304,7 @@
       lower="-0.32"
       upper="0"
       effort="0"
-      velocity="0" />
+      velocity="1.5" />
   </joint>
 
   <joint
@@ -380,7 +323,8 @@
       lower="0"
       upper="0.35"
       effort="0"
-      velocity="0" />
+      velocity="1.5"
+       />
   </joint>
 
   <joint
@@ -399,7 +343,8 @@
       lower="-0.38"
       upper="0"
       effort="0"
-      velocity="0" />
+      velocity="1.5"
+       />
   </joint>
 
   <joint
@@ -418,7 +363,8 @@
       lower="0"
       upper="3.14"
       effort="0"
-      velocity="0" />
+      velocity="1.5"
+       />
   </joint>
 
   <joint
@@ -437,7 +383,8 @@
       lower="-3.14"
       upper="3.14"
       effort="0"
-      velocity="0" />
+      velocity="1.5"
+       />
   </joint>
 
   <joint
@@ -456,7 +403,8 @@
       lower="-3.14"
       upper="3.14"
       effort="0"
-      velocity="0" />
+      velocity="1.5"
+       />
   </joint>
 
 </robot>

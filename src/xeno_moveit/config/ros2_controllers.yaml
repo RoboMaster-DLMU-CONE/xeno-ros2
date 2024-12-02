@@ -19,8 +19,7 @@ xeno_group_controller:
       - joint_4
       - joint_5
     command_interfaces:
-      - position
+      []
     state_interfaces:
-      - position
-      - velocity
+      []
     allow_nonzero_velocity_at_trajectory_end: true
