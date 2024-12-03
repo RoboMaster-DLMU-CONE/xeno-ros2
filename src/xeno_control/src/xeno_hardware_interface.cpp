@@ -73,7 +73,10 @@ namespace xeno_control {
     for (int i = 1; i <= 6; i++) {
       joints[i].position = read_motor_position(i);
       joints[i].velocity = read_motor_velocity(i);
+      //   RCLCPP_INFO(
+      //     rclcpp::get_logger("XenoHardware"), std::to_string(joints[i].position).c_str());
     }
+
     return hardware_interface::return_type::OK;
   }
 
