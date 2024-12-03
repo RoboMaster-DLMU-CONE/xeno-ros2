@@ -22,6 +22,7 @@ def generate_launch_description():
             description="Start RViz2 automatically with this launch file.",
         )
     )
+
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -38,15 +39,14 @@ def generate_launch_description():
     )
     robot_description = {"robot_description": robot_description_content}
 
-    controllers_config = (
-        PathJoinSubstitution(
-            [
-                FindPackageShare("xeno_control"),
-                "config",
-                "controllers.yaml",
-            ]
-        ),
+    controllers_config = PathJoinSubstitution(
+        [
+            FindPackageShare("xeno_control"),
+            "config",
+            "controllers.yaml",
+        ]
     )
+
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare("xeno_urdf"), "r6bot/rviz", "view_robot.rviz"]
     )
@@ -80,6 +80,16 @@ def generate_launch_description():
                 package="controller_manager",
                 executable="spawner",
                 arguments=["joint_state_broadcaster"],
+            ),
+            Node(
+                package="controller_manager",
+                executable="spawner",
+                arguments=["xeno_group_controller"],
+            ),
+            Node(
+                package="controller_manager",
+                executable="spawner",
+                arguments=["end_group_controller"],
             ),
             rviz_node,
         ]
