@@ -1,410 +1,412 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="xeno_urdf">
+  <xacro:macro name="xeno_description">
 
-  <link
-    name="base_link">
-    <inertial>
-      <origin
-        xyz="0.305094473393476 0.297832125522315 0.159681027542379"
-        rpy="0 0 0" />
-      <mass
-        value="8.34373922145942" />
-      <inertia
-        ixx="0.0469906760740281"
-        ixy="5.14839360689645E-05"
-        ixz="6.47739202877026E-07"
-        iyy="0.0564978768313125"
-        iyz="-1.02031036586264E-07"
-        izz="0.0340441540583983" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/base_link.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/base_link.STL" />
-      </geometry>
-    </collision>
-  </link>
+    <link
+      name="base_link">
+      <inertial>
+        <origin
+          xyz="0.305094473393476 0.297832125522315 0.159681027542379"
+          rpy="0 0 0" />
+        <mass
+          value="8.34373922145942" />
+        <inertia
+          ixx="0.0469906760740281"
+          ixy="5.14839360689645E-05"
+          ixz="6.47739202877026E-07"
+          iyy="0.0564978768313125"
+          iyz="-1.02031036586264E-07"
+          izz="0.0340441540583983" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/base_link.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/base_link.STL" />
+        </geometry>
+      </collision>
+    </link>
 
-  <link
-    name="link_1">
-    <inertial>
-      <origin
-        xyz="-0.203417099023048 0.249999999169318 -0.0147118213931048"
-        rpy="0 0 0" />
-      <mass
-        value="0.665767546458287" />
-      <inertia
-        ixx="6.50274527224072E-05"
-        ixy="-2.74978722993329E-18"
-        ixz="-5.68725101029244E-06"
-        iyy="0.00800853644421888"
-        iyz="2.68466855544117E-19"
-        izz="0.00798296332389548" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link1.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="1 1 1 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link1.STL" />
-      </geometry>
-    </collision>
-  </link>
+    <link
+      name="link_1">
+      <inertial>
+        <origin
+          xyz="-0.203417099023048 0.249999999169318 -0.0147118213931048"
+          rpy="0 0 0" />
+        <mass
+          value="0.665767546458287" />
+        <inertia
+          ixx="6.50274527224072E-05"
+          ixy="-2.74978722993329E-18"
+          ixz="-5.68725101029244E-06"
+          iyy="0.00800853644421888"
+          iyz="2.68466855544117E-19"
+          izz="0.00798296332389548" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link1.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link1.STL" />
+        </geometry>
+      </collision>
+    </link>
 
-  <link
-    name="link_2">
-    <inertial>
-      <origin
-        xyz="0.324490821488572 0.170056267864949 0.028582704465656"
-        rpy="0 0 0" />
-      <mass
-        value="1.21417100402845" />
-      <inertia
-        ixx="0.0065316705527893"
-        ixy="4.70515716369336E-07"
-        ixz="1.97461826682341E-08"
-        iyy="0.0083422227460292"
-        iyz="-4.96570020126472E-08"
-        izz="0.0147593176708924" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link2.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link2.STL" />
-      </geometry>
-    </collision>
-  </link>
+    <link
+      name="link_2">
+      <inertial>
+        <origin
+          xyz="0.324490821488572 0.170056267864949 0.028582704465656"
+          rpy="0 0 0" />
+        <mass
+          value="1.21417100402845" />
+        <inertia
+          ixx="0.0065316705527893"
+          ixy="4.70515716369336E-07"
+          ixz="1.97461826682341E-08"
+          iyy="0.0083422227460292"
+          iyz="-4.96570020126472E-08"
+          izz="0.0147593176708924" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link2.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link2.STL" />
+        </geometry>
+      </collision>
+    </link>
 
-  <link
-    name="link_3">
-    <inertial>
-      <origin
-        xyz="-0.0414561721258744 -0.381930292723158 0.0296102021695027"
-        rpy="0 0 0" />
-      <mass
-        value="0.246364304381205" />
-      <inertia
-        ixx="0.000115401552196979"
-        ixy="-1.32414952808114E-05"
-        ixz="4.41732232362797E-09"
-        iyy="3.73447914211717E-05"
-        iyz="5.79263428605455E-08"
-        izz="0.00015058989135556" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link3.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.647058823529412 0.619607843137255 0.588235294117647 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link3.STL" />
-      </geometry>
-    </collision>
-  </link>
+    <link
+      name="link_3">
+      <inertial>
+        <origin
+          xyz="-0.0414561721258744 -0.381930292723158 0.0296102021695027"
+          rpy="0 0 0" />
+        <mass
+          value="0.246364304381205" />
+        <inertia
+          ixx="0.000115401552196979"
+          ixy="-1.32414952808114E-05"
+          ixz="4.41732232362797E-09"
+          iyy="3.73447914211717E-05"
+          iyz="5.79263428605455E-08"
+          izz="0.00015058989135556" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link3.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.647058823529412 0.619607843137255 0.588235294117647 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link3.STL" />
+        </geometry>
+      </collision>
+    </link>
 
-  <link
-    name="link_4">
-    <inertial>
-      <origin
-        xyz="0.000118685682633846 -0.0290479332552551 0.0216100676178127"
-        rpy="0 0 0" />
-      <mass
-        value="0.654215847489834" />
-      <inertia
-        ixx="0.000262176142085516"
-        ixy="-9.269799959598E-08"
-        ixz="-2.98072694512485E-08"
-        iyy="0.000284951782416327"
-        iyz="7.65570845300632E-06"
-        izz="0.000290627371493145" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link4.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link4.STL" />
-      </geometry>
-    </collision>
-  </link>
+    <link
+      name="link_4">
+      <inertial>
+        <origin
+          xyz="0.000118685682633846 -0.0290479332552551 0.0216100676178127"
+          rpy="0 0 0" />
+        <mass
+          value="0.654215847489834" />
+        <inertia
+          ixx="0.000262176142085516"
+          ixy="-9.269799959598E-08"
+          ixz="-2.98072694512485E-08"
+          iyy="0.000284951782416327"
+          iyz="7.65570845300632E-06"
+          izz="0.000290627371493145" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link4.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link4.STL" />
+        </geometry>
+      </collision>
+    </link>
 
-  <link
-    name="link_5">
-    <inertial>
+    <link
+      name="link_5">
+      <inertial>
+        <origin
+          xyz="-0.00100717551069329 -0.0735464148845602 0.0133234657824919"
+          rpy="0 0 0" />
+        <mass
+          value="0.108515356455072" />
+        <inertia
+          ixx="9.54767216463274E-05"
+          ixy="4.94143643072523E-07"
+          ixz="1.50000096456065E-08"
+          iyy="3.08967780686823E-05"
+          iyz="-1.56014329844716E-06"
+          izz="9.8648870587829E-05" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link5.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.847058823529412 0.847058823529412 0.847058823529412 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link5.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link
+      name="link_6">
+      <inertial>
+        <origin
+          xyz="2.27595720048157E-15 5.79310904802455E-15 0.0319755100561606"
+          rpy="0 0 0" />
+        <mass
+          value="0.076783081415109" />
+        <inertia
+          ixx="1.60025819642233E-05"
+          ixy="-1.40105408846634E-08"
+          ixz="4.46890691075213E-20"
+          iyy="1.59769774781377E-05"
+          iyz="1.21395301251223E-18"
+          izz="2.2728267321003E-05" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link6.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://xeno_urdf/r6bot/meshes/link6.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint
+      name="joint_1"
+      type="prismatic">
       <origin
-        xyz="-0.00100717551069329 -0.0735464148845602 0.0133234657824919"
-        rpy="0 0 0" />
-      <mass
-        value="0.108515356455072" />
-      <inertia
-        ixx="9.54767216463274E-05"
-        ixy="4.94143643072523E-07"
-        ixz="1.50000096456065E-08"
-        iyy="3.08967780686823E-05"
-        iyz="-1.56014329844716E-06"
-        izz="9.8648870587829E-05" />
-    </inertial>
-    <visual>
+        xyz="0.077 0.05 0.189"
+        rpy="3.1416 0 -3.1416" />
+      <parent
+        link="base_link" />
+      <child
+        link="link_1" />
+      <axis
+        xyz="0 0 1" />
+      <limit
+        lower="-0.32"
+        upper="0"
+        effort="0"
+        velocity="1.5" />
+    </joint>
+
+    <joint
+      name="joint_2"
+      type="prismatic">
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link5.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.847058823529412 0.847058823529412 0.847058823529412 1" />
-      </material>
-    </visual>
-    <collision>
+        xyz="0.002 0.08 0.006"
+        rpy="3.1416 0 3.1416" />
+      <parent
+        link="link_1" />
+      <child
+        link="link_2" />
+      <axis
+        xyz="1 0 0" />
+      <limit
+        lower="0"
+        upper="0.35"
+        effort="0"
+        velocity="1.5"
+      />
+    </joint>
+
+    <joint
+      name="joint_3"
+      type="prismatic">
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link5.STL" />
-      </geometry>
-    </collision>
-  </link>
+        xyz="0.4 -0.07 0.02"
+        rpy="0 0 -3.1416" />
+      <parent
+        link="link_2" />
+      <child
+        link="link_3" />
+      <axis
+        xyz="0 -1 0" />
+      <limit
+        lower="-0.38"
+        upper="0"
+        effort="0"
+        velocity="1.5"
+      />
+    </joint>
 
-  <link
-    name="link_6">
-    <inertial>
+    <joint
+      name="joint_4"
+      type="revolute">
       <origin
-        xyz="2.27595720048157E-15 5.79310904802455E-15 0.0319755100561606"
-        rpy="0 0 0" />
-      <mass
-        value="0.076783081415109" />
-      <inertia
-        ixx="1.60025819642233E-05"
-        ixy="-1.40105408846634E-08"
-        ixz="4.46890691075213E-20"
-        iyy="1.59769774781377E-05"
-        iyz="1.21395301251223E-18"
-        izz="2.2728267321003E-05" />
-    </inertial>
-    <visual>
+        xyz="-0.056476 -0.45065 0.051196"
+        rpy="0 0 -3.1416" />
+      <parent
+        link="link_3" />
+      <child
+        link="link_4" />
+      <axis
+        xyz="0 0 1" />
+      <limit
+        lower="0"
+        upper="3.14"
+        effort="0"
+        velocity="1.5"
+      />
+    </joint>
+
+    <joint
+      name="joint_5"
+      type="revolute">
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link6.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
-      </material>
-    </visual>
-    <collision>
+        xyz="0.00033734 -0.082499 0.0185"
+        rpy="0 -0.0015344 0" />
+      <parent
+        link="link_4" />
+      <child
+        link="link_5" />
+      <axis
+        xyz="0.004089 -0.99999 0" />
+      <limit
+        lower="-3.14"
+        upper="3.14"
+        effort="0"
+        velocity="1.5"
+      />
+    </joint>
+
+    <joint
+      name="joint_6"
+      type="revolute">
       <origin
-        xyz="0 0 0"
+        xyz="0.00051317 -0.1255 0.009"
         rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://xeno_urdf/r6bot/meshes/link6.STL" />
-      </geometry>
-    </collision>
-  </link>
-
-  <joint
-    name="joint_1"
-    type="prismatic">
-    <origin
-      xyz="0.077 0.05 0.189"
-      rpy="3.1416 0 -3.1416" />
-    <parent
-      link="base_link" />
-    <child
-      link="link_1" />
-    <axis
-      xyz="0 0 1" />
-    <limit
-      lower="-0.32"
-      upper="0"
-      effort="0"
-      velocity="1.5" />
-  </joint>
-
-  <joint
-    name="joint_2"
-    type="prismatic">
-    <origin
-      xyz="0.002 0.08 0.006"
-      rpy="3.1416 0 3.1416" />
-    <parent
-      link="link_1" />
-    <child
-      link="link_2" />
-    <axis
-      xyz="1 0 0" />
-    <limit
-      lower="0"
-      upper="0.35"
-      effort="0"
-      velocity="1.5"
-       />
-  </joint>
-
-  <joint
-    name="joint_3"
-    type="prismatic">
-    <origin
-      xyz="0.4 -0.07 0.02"
-      rpy="0 0 -3.1416" />
-    <parent
-      link="link_2" />
-    <child
-      link="link_3" />
-    <axis
-      xyz="0 -1 0" />
-    <limit
-      lower="-0.38"
-      upper="0"
-      effort="0"
-      velocity="1.5"
-       />
-  </joint>
-
-  <joint
-    name="joint_4"
-    type="revolute">
-    <origin
-      xyz="-0.056476 -0.45065 0.051196"
-      rpy="0 0 -3.1416" />
-    <parent
-      link="link_3" />
-    <child
-      link="link_4" />
-    <axis
-      xyz="0 0 1" />
-    <limit
-      lower="0"
-      upper="3.14"
-      effort="0"
-      velocity="1.5"
-       />
-  </joint>
-
-  <joint
-    name="joint_5"
-    type="revolute">
-    <origin
-      xyz="0.00033734 -0.082499 0.0185"
-      rpy="0 -0.0015344 0" />
-    <parent
-      link="link_4" />
-    <child
-      link="link_5" />
-    <axis
-      xyz="0.004089 -0.99999 0" />
-    <limit
-      lower="-3.14"
-      upper="3.14"
-      effort="0"
-      velocity="1.5"
-       />
-  </joint>
-
-  <joint
-    name="joint_6"
-    type="revolute">
-    <origin
-      xyz="0.00051317 -0.1255 0.009"
-      rpy="0 0 0" />
-    <parent
-      link="link_5" />
-    <child
-      link="link_6" />
-    <axis
-      xyz="0 0 -1" />
-    <limit
-      lower="-3.14"
-      upper="3.14"
-      effort="0"
-      velocity="1.5"
-       />
-  </joint>
+      <parent
+        link="link_5" />
+      <child
+        link="link_6" />
+      <axis
+        xyz="0 0 -1" />
+      <limit
+        lower="-3.14"
+        upper="3.14"
+        effort="0"
+        velocity="1.5"
+      />
+    </joint>
+  </xacro:macro>
 
 </robot>

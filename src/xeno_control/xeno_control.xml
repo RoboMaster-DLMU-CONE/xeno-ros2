@@ -1,9 +1,9 @@
 <library path="xeno_control">
-  <class name="xeno_control"
-         type="xeno_control::RobotHardware"
-         base_class_type="hardware_interface::SystemInterface">
+  <class name="xeno_control/XenoHardware"
+    type="xeno_control::XenoHardware"
+    base_class_type="hardware_interface::SystemInterface">
     <description>
-      Robot hardware plugin for xeno car.
+      Robot hardware plugin for xeno car using a system hardware interface-type.
     </description>
   </class>
 </library>

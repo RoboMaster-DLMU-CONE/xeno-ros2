@@ -44,15 +44,33 @@ ament_target_dependencies(xeno_control PUBLIC ${HARDWARE_INCLUDE_DEPENDS})
 target_include_directories(xeno_control PUBLIC include)
 
 pluginlib_export_plugin_description_file(hardware_interface xeno_control.xml)
-
+# descriptions
 install(
-  DIRECTORY description/launch description/ros2_control description/urdf
-  DESTINATION share/xeno_control
+  DIRECTORY description/ros2_control description/urdf
+  DESTINATION share/xeno_control/description
 )
-
+# launch files
 install(
   DIRECTORY bringup/
+  DESTINATION share/xeno_control/launch
+)
+install(
+  DIRECTORY description/launch
   DESTINATION share/xeno_control
 )
+# config files
+install(
+  DIRECTORY config/
+  DESTINATION share/xeno_control/config
+)
 
+install(TARGETS xeno_control
+  EXPORT export_xeno_control
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+# ament_export_targets(export_xeno_control HAS_LIBRARY_TARGET)
+ament_export_dependencies(${HARDWARE_INCLUDE_DEPENDS})
 ament_package()
