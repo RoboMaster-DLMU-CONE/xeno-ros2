@@ -5,6 +5,7 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 moveit_simple_controller_manager:
   controller_names:
     - xeno_group_controller
+    - end_group_controller
 
   xeno_group_controller:
     type: FollowJointTrajectory
@@ -16,5 +17,9 @@ moveit_simple_controller_manager:
       - joint_3
       - joint_4
       - joint_5
+  end_group_controller:
+    type: FollowJointTrajectory
     action_ns: follow_joint_trajectory
     default: true
+    joints:
+      - joint_6

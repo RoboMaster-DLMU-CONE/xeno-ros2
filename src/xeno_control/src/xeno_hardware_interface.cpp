@@ -32,6 +32,10 @@ namespace xeno_control {
       hardware_interface::StateInterface("joint_5", hardware_interface::HW_IF_POSITION, &joints[5].position));
     state_interfaces.emplace_back(
       hardware_interface::StateInterface("joint_5", hardware_interface::HW_IF_VELOCITY, &joints[5].velocity));
+    state_interfaces.emplace_back(
+      hardware_interface::StateInterface("joint_6", hardware_interface::HW_IF_POSITION, &joints[6].position));
+    state_interfaces.emplace_back(
+      hardware_interface::StateInterface("joint_6", hardware_interface::HW_IF_VELOCITY, &joints[6].velocity));
 
     return state_interfaces;
   }
@@ -49,6 +53,8 @@ namespace xeno_control {
       hardware_interface::CommandInterface("joint_4", hardware_interface::HW_IF_POSITION, &joints[4].command));
     command_interfaces.emplace_back(
       hardware_interface::CommandInterface("joint_5", hardware_interface::HW_IF_POSITION, &joints[5].command));
+    command_interfaces.emplace_back(
+      hardware_interface::CommandInterface("joint_6", hardware_interface::HW_IF_POSITION, &joints[6].command));
     return command_interfaces;
   }
 
@@ -64,7 +70,7 @@ namespace xeno_control {
 
   return_type XenoHardware::read(const rclcpp::Time &time, const rclcpp::Duration &period) {
     // 从硬件读取电机位置和速度
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 6; i++) {
       joints[i].position = read_motor_position(i);
       joints[i].velocity = read_motor_velocity(i);
     }
@@ -73,7 +79,7 @@ namespace xeno_control {
 
   return_type XenoHardware::write(const rclcpp::Time &time, const rclcpp::Duration &period) {
     // 将命令写入硬件
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 6; i++) {
       write_motor_position(i, joints[i].command);
     }
     return hardware_interface::return_type::OK;

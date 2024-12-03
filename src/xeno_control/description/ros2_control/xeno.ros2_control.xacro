@@ -40,6 +40,13 @@
                 </state_interface>
                 <state_interface name="velocity" />
             </joint>
+            <joint name="joint_6">
+                <command_interface name="position" />
+                <state_interface name="position">
+                    <param name="initial_value">0.0000</param>
+                </state_interface>
+                <state_interface name="velocity" />
+            </joint>
         </ros2_control>
     </xacro:macro>
 </robot>
