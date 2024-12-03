@@ -1,11 +1,27 @@
 import os
 from launch import LaunchDescription
-from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
+from launch.actions import RegisterEventHandler, DeclareLaunchArgument
+from launch.conditions import IfCondition
+from launch.event_handlers import OnProcessExit
+from launch.substitutions import (
+    Command,
+    FindExecutable,
+    PathJoinSubstitution,
+    LaunchConfiguration,
+)
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    declared_arguments = []
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gui",
+            default_value="true",
+            description="Start RViz2 automatically with this launch file.",
+        )
+    )
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -31,9 +47,41 @@ def generate_launch_description():
             ]
         ),
     )
+    rviz_config_file = PathJoinSubstitution(
+        [FindPackageShare("xeno_urdf"), "r6bot/rviz", "view_robot.rviz"]
+    )
+    gui = LaunchConfiguration("gui")
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="log",
+        arguments=["-d", rviz_config_file],
+        condition=IfCondition(gui),
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster"],
+    )
+
+    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[rviz_node],
+        )
+    )
 
     return LaunchDescription(
-        [
+        declared_arguments
+        + [
+            Node(
+                package="controller_manager",
+                executable="ros2_control_node",
+                parameters=[controllers_config],
+                output="both",
+            ),
             Node(
                 package="robot_state_publisher",
                 executable="robot_state_publisher",
@@ -43,14 +91,9 @@ def generate_launch_description():
             ),
             Node(
                 package="controller_manager",
-                executable="ros2_control_node",
-                parameters=[controllers_config],
-                output="both",
-            ),
-            Node(
-                package="controller_manager",
                 executable="spawner",
                 arguments=["joint_state_broadcaster"],
             ),
+            rviz_node,
         ]
     )
