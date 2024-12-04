@@ -2,8 +2,11 @@ controller_manager:
   ros__parameters:
     update_rate: 10  # Hz
 
-    joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcaster
+    # joint_state_broadcaster:
+    #   type: joint_state_broadcaster/JointStateBroadcaster
+    
+    # xeno_controller:
+    #   type: xeno_control/XenoHardware
 
 
 xeno_controller:
@@ -19,7 +22,7 @@ xeno_controller:
 
     command_interfaces:
       - position
-      - velocity
+      # - velocity
 
     state_interfaces:
       - position

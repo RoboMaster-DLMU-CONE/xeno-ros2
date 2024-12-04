@@ -76,9 +76,11 @@ def generate_launch_description():
                 parameters=[robot_description],
             ),
             Node(
-                package="controller_manager",
-                executable="spawner",
-                arguments=["joint_state_broadcaster"],
+                package="joint_state_publisher",
+                executable="joint_state_publisher",
+                name="joint_state_publisher",
+                output="both",
+                parameters=[robot_description, {"source_list": ["joint_states"]}],
             ),
             rviz_node,
         ]
