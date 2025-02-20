@@ -1,7 +1,7 @@
 moveit_setup_assistant_config:
   urdf:
     package: xeno_urdf
-    relative_path: r6bot/urdf/r6bot_description.urdf.xacro
+    relative_path: xeno_urdf/urdf/xeno_urdf_description.urdf.xacro
   srdf:
     relative_path: config/xeno_urdf.srdf
   package_settings:

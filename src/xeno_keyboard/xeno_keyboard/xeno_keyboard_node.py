@@ -34,9 +34,9 @@ class KeyboardControlNode(Node):
         joint_limits = {}
         urdf_path = os.path.join(
             get_package_share_directory("xeno_urdf"),
-            "r6bot",
+            "xeno_urdf",
             "urdf",
-            "r6bot_description.urdf.xacro",
+            "xeno_urdf_description.urdf.xacro",
         )
         tree = ET.parse(urdf_path)
         root = tree.getroot()

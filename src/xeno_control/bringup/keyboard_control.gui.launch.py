@@ -47,7 +47,7 @@ def generate_launch_description():
     )
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("xeno_urdf"), "r6bot/rviz", "view_robot.rviz"]
+        [FindPackageShare("xeno_urdf"), "xeno_urdf/rviz", "view_robot.rviz"]
     )
     gui = LaunchConfiguration("gui")
     rviz_node = Node(

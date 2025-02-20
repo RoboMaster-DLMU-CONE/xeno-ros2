@@ -4,8 +4,8 @@ project(xeno_urdf)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY r6bot/meshes r6bot/urdf r6bot/rviz
-  DESTINATION share/${PROJECT_NAME}/r6bot
+  DIRECTORY xeno_urdf/meshes xeno_urdf/urdf xeno_urdf/rviz
+  DESTINATION share/${PROJECT_NAME}/xeno_urdf
 )
 
 ament_package()

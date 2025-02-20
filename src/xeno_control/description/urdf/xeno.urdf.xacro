@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="xeno">
 
-  <!-- Import r6bot macro -->
-  <xacro:include filename="$(find xeno_urdf)/r6bot/urdf/r6bot_description.urdf.xacro" />
+  <!-- Import xeno_urdf macro -->
+  <xacro:include filename="$(find xeno_urdf)/xeno_urdf/urdf/xeno_urdf_description.urdf.xacro" />
 
   <xacro:include filename="$(find xeno_control)/description/ros2_control/xeno.ros2_control.xacro" />
   <xacro:xeno_ros2_control name="xeno" />

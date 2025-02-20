@@ -37,7 +37,7 @@ def generate_launch_description():
     robot_description = {"robot_description": robot_description_content}
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("xeno_urdf"), "r6bot/rviz", "view_robot.rviz"]
+        [FindPackageShare("xeno_urdf"), "xeno_urdf/rviz", "view_robot.rviz"]
     )
 
     joint_state_publisher_node = Node(
