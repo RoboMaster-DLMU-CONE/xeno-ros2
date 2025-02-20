@@ -3,9 +3,8 @@
 <package format="3">
   <name>xeno_moveit</name>
   <version>0.3.0</version>
-  <description>
-     An automatically generated package with all the configuration and launch files for using the xeno_urdf with the MoveIt Motion Planning Framework
-  </description>
+  <description> An automatically generated package with all the configuration and launch files for
+    using the xeno_urdf with the MoveIt Motion Planning Framework </description>
   <maintainer email="moonbite233@gmail.com">MoonFeather</maintainer>
 
   <license>BSD-3-Clause</license>
@@ -41,12 +40,11 @@
   <exec_depend>rviz_common</exec_depend>
   <exec_depend>rviz_default_plugins</exec_depend>
   <exec_depend>tf2_ros</exec_depend>
-  <exec_depend>warehouse_ros_mongo</exec_depend>
   <exec_depend>xacro</exec_depend>
   <exec_depend>xeno_urdf</exec_depend>
 
 
   <export>
-      <build_type>ament_cmake</build_type>
+    <build_type>ament_cmake</build_type>
   </export>
 </package>
