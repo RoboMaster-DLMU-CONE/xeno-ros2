@@ -95,9 +95,10 @@
       link="link_1" />
     <axis
       xyz="0 1 0" />
+    <!-- 298.37mm -->
     <limit
-      lower="-0.32"
-      upper="0.32"
+      lower="0"
+      upper="0.29"
       effort="0"
       velocity="1.5" />
   </joint>
@@ -142,7 +143,7 @@
       </geometry>
     </collision>
   </link>
-
+  <!-- 298.37mm -->
   <joint
     name="joint_2"
     type="prismatic">
@@ -156,13 +157,13 @@
     <axis
       xyz="0 0 -1" />
     <limit
-      lower="-0.35"
+      lower="0"
       upper="0.35"
       effort="0"
       velocity="1.5"
     />
   </joint>
-
+  
   <link
     name="link_3">
     <inertial>
@@ -203,7 +204,7 @@
       </geometry>
     </collision>
   </link>
-
+    <!-- 380mm -->
     <joint
     name="joint_3"
     type="prismatic">
@@ -215,10 +216,10 @@
     <child
       link="link_3" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
-      lower="-0.38"
-      upper="0.38"
+      lower="0"
+      upper="0.17"
       effort="0"
       velocity="1.5"
     />
@@ -230,7 +231,7 @@
       <origin
         xyz="0.0075553 0.025636 -0.0050399"
         rpy="0 0 0" />
-      <mass
+      <mass 
         value="0.47365" />
       <inertia
         ixx="0.00018548"
