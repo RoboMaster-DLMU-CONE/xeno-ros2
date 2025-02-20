@@ -28,6 +28,7 @@ def generate_launch_description():
             PathJoinSubstitution(
                 [
                     FindPackageShare("xeno_control"),
+                    "description",
                     "urdf",
                     "xeno.urdf.xacro",
                 ]
