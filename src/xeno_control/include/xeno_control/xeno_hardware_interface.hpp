@@ -38,7 +38,7 @@ namespace xeno_control {
     return_type write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) override;
 
   private:
-    Joint joints[7];
+    Joint joints[8];
 
     double read_motor_position(const int joint_id) const {
       return joints[joint_id].position;

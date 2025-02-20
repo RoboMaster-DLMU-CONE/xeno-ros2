@@ -22,6 +22,7 @@ xeno_group_controller:
       - joint_3
       - joint_4
       - joint_5
+      - joint_6
     command_interfaces:
       - position
     state_interfaces:
@@ -31,7 +32,7 @@ xeno_group_controller:
 end_group_controller:
   ros__parameters:
     joints:
-      - joint_6
+      - joint_7
     command_interfaces:
       - position
     state_interfaces:

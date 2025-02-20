@@ -22,6 +22,7 @@ class KeyboardControlNode(Node):
             "joint_4",
             "joint_5",
             "joint_6",
+            "joint_7",
         ]
         self.joint_state.position = [0.0] * 6
         self.joint_limits = self.get_joint_limits()

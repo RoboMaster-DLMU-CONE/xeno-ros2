@@ -36,6 +36,10 @@ namespace xeno_control {
       hardware_interface::StateInterface("joint_6", hardware_interface::HW_IF_POSITION, &joints[6].position));
     state_interfaces.emplace_back(
       hardware_interface::StateInterface("joint_6", hardware_interface::HW_IF_VELOCITY, &joints[6].velocity));
+    state_interfaces.emplace_back(
+      hardware_interface::StateInterface("joint_7", hardware_interface::HW_IF_POSITION, &joints[7].position));
+    state_interfaces.emplace_back(
+      hardware_interface::StateInterface("joint_7", hardware_interface::HW_IF_VELOCITY, &joints[7].velocity));
 
     return state_interfaces;
   }
@@ -55,6 +59,8 @@ namespace xeno_control {
       hardware_interface::CommandInterface("joint_5", hardware_interface::HW_IF_POSITION, &joints[5].command));
     command_interfaces.emplace_back(
       hardware_interface::CommandInterface("joint_6", hardware_interface::HW_IF_POSITION, &joints[6].command));
+    command_interfaces.emplace_back(
+      hardware_interface::CommandInterface("joint_7", hardware_interface::HW_IF_POSITION, &joints[7].command));
     return command_interfaces;
   }
 
