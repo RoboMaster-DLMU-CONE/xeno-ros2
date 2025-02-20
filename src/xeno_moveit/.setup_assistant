@@ -7,7 +7,7 @@ moveit_setup_assistant_config:
   package_settings:
     author_name: MoonFeather
     author_email: moonbite233@gmail.com
-    generated_timestamp: 1740043162
+    generated_timestamp: 1740061999
   control_xacro:
     command:
       - position
