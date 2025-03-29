@@ -3,3 +3,4 @@ install
 log
 .idea
 .vscode
+cmake-build*
