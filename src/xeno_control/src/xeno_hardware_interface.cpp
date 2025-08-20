@@ -1,5 +1,6 @@
 #include "xeno_control/xeno_hardware_interface.hpp"
-
+#include "xeno_control/joints/Arm.hpp"
+#include "xeno_control/joints/Lift.hpp"
 
 using hardware_interface::CallbackReturn;
 using hardware_interface::return_type;
@@ -11,18 +12,21 @@ namespace xeno_control
     // 初始化硬件接口
     // 例如，连接到电机控制器
 #ifdef XENO_CONTROL_SIMULATE
+#else
+    Lift::getInstance();
+    Arm::getInstance();
+#endif
     (void)info;
     return CallbackReturn::SUCCESS;
-#endif
   }
 
   CallbackReturn XenoHardware::on_activate(const rclcpp_lifecycle::State& previous_state)
   {
     // 激活硬件接口
 #ifdef XENO_CONTROL_SIMULATE
+#endif
     (void)previous_state;
     return CallbackReturn::SUCCESS;
-#endif
   }
 
   CallbackReturn XenoHardware::on_deactivate(const rclcpp_lifecycle::State& previous_state)

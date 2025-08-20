@@ -5,6 +5,9 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif ()
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(HARDWARE_INCLUDE_DEPENDS
         pluginlib
         hardware_interface
@@ -39,9 +42,14 @@ if (BUILD_TESTING)
 endif ()
 
 
-add_library(xeno_control SHARED src/xeno_hardware_interface.cpp)
+add_library(xeno_control SHARED
+        src/xeno_hardware_interface.cpp
+        src/joints/Arm.cpp
+        src/joints/Lift.cpp
+)
 
-#target_link_libraries(xeno_control PRIVATE OneMotor::OneMotor)
+include(cmake/findOneMotor.cmake)
+target_link_libraries(xeno_control PRIVATE OneMotor::OneMotor)
 
 if (XENO_CONTROL_SIMULATE)
     target_compile_definitions(xeno_control PRIVATE XENO_CONTROL_SIMULATE)
