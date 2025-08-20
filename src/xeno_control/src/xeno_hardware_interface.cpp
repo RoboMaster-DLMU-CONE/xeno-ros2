@@ -1,102 +1,87 @@
 #include "xeno_control/xeno_hardware_interface.hpp"
+
+
 using hardware_interface::CallbackReturn;
 using hardware_interface::return_type;
 
-namespace xeno_control {
-  CallbackReturn XenoHardware::on_init(const hardware_interface::HardwareInfo &info) {
+namespace xeno_control
+{
+  CallbackReturn XenoHardware::on_init(const hardware_interface::HardwareInfo& info)
+  {
     // 初始化硬件接口
     // 例如，连接到电机控制器
+#ifdef XENO_CONTROL_SIMULATE
+    (void)info;
     return CallbackReturn::SUCCESS;
+#endif
   }
 
-  std::vector<hardware_interface::StateInterface> XenoHardware::export_state_interfaces() {
-    std::vector<hardware_interface::StateInterface> state_interfaces;
-    // 添加电机位置和速度状态接口
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_1", hardware_interface::HW_IF_POSITION, &joints[1].position));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_1", hardware_interface::HW_IF_VELOCITY, &joints[1].velocity));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_2", hardware_interface::HW_IF_POSITION, &joints[2].position));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_2", hardware_interface::HW_IF_VELOCITY, &joints[2].velocity));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_3", hardware_interface::HW_IF_POSITION, &joints[3].position));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_3", hardware_interface::HW_IF_VELOCITY, &joints[3].velocity));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_4", hardware_interface::HW_IF_POSITION, &joints[4].position));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_4", hardware_interface::HW_IF_VELOCITY, &joints[4].velocity));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_5", hardware_interface::HW_IF_POSITION, &joints[5].position));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_5", hardware_interface::HW_IF_VELOCITY, &joints[5].velocity));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_6", hardware_interface::HW_IF_POSITION, &joints[6].position));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_6", hardware_interface::HW_IF_VELOCITY, &joints[6].velocity));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_7", hardware_interface::HW_IF_POSITION, &joints[7].position));
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface("joint_7", hardware_interface::HW_IF_VELOCITY, &joints[7].velocity));
-
-    return state_interfaces;
-  }
-
-  std::vector<hardware_interface::CommandInterface> XenoHardware::export_command_interfaces() {
-    std::vector<hardware_interface::CommandInterface> command_interfaces;
-    // 添加电机位置命令接口
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface("joint_1", hardware_interface::HW_IF_POSITION, &joints[1].command));
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface("joint_2", hardware_interface::HW_IF_POSITION, &joints[2].command));
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface("joint_3", hardware_interface::HW_IF_POSITION, &joints[3].command));
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface("joint_4", hardware_interface::HW_IF_POSITION, &joints[4].command));
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface("joint_5", hardware_interface::HW_IF_POSITION, &joints[5].command));
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface("joint_6", hardware_interface::HW_IF_POSITION, &joints[6].command));
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface("joint_7", hardware_interface::HW_IF_POSITION, &joints[7].command));
-    return command_interfaces;
-  }
-
-  CallbackReturn XenoHardware::on_activate(const rclcpp_lifecycle::State &previous_state) {
+  CallbackReturn XenoHardware::on_activate(const rclcpp_lifecycle::State& previous_state)
+  {
     // 激活硬件接口
+#ifdef XENO_CONTROL_SIMULATE
+    (void)previous_state;
     return CallbackReturn::SUCCESS;
+#endif
   }
 
-  CallbackReturn XenoHardware::on_deactivate(const rclcpp_lifecycle::State &previous_state) {
+  CallbackReturn XenoHardware::on_deactivate(const rclcpp_lifecycle::State& previous_state)
+  {
+#ifdef XENO_CONTROL_SIMULATE
     // 停用硬件接口
+    (void)previous_state;
     return CallbackReturn::SUCCESS;
+#endif
   }
 
-  return_type XenoHardware::read(const rclcpp::Time &time, const rclcpp::Duration &period) {
+  return_type XenoHardware::read(const rclcpp::Time& time, const rclcpp::Duration& period)
+  {
     // 从硬件读取电机位置和速度
-    for (int i = 1; i <= 6; i++) {
+#ifdef XENO_CONTROL_SIMULATE
+    (void)time;
+    (void)period;
+    for (int i = 1; i <= 6; i++)
+    {
       joints[i].position = read_motor_position(i);
       joints[i].velocity = read_motor_velocity(i);
       //   RCLCPP_INFO(
       //     rclcpp::get_logger("XenoHardware"), std::to_string(joints[i].position).c_str());
     }
+#endif
 
-    return hardware_interface::return_type::OK;
+
+    return return_type::OK;
   }
 
-  return_type XenoHardware::write(const rclcpp::Time &time, const rclcpp::Duration &period) {
+  return_type XenoHardware::write(const rclcpp::Time& time, const rclcpp::Duration& period)
+  {
     // 将命令写入硬件
-    for (int i = 1; i <= 6; i++) {
+#ifdef XENO_CONTROL_SIMULATE
+    (void)time;
+    (void)period;
+    for (int i = 1; i <= 6; i++)
+    {
       write_motor_position(i, joints[i].command);
     }
-    return hardware_interface::return_type::OK;
+    return return_type::OK;
+#endif
+  }
+
+  double XenoHardware::read_motor_position(const int joint_id) const
+  {
+    return joints[joint_id].position;
+  }
+
+  double XenoHardware::read_motor_velocity(const int joint_id) const
+  {
+    return joints[joint_id].velocity;
+  }
+
+  void XenoHardware::write_motor_position(const int joint_id, const double position)
+  {
+    joints[joint_id].position = position;
   }
 };
 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(xeno_control::XenoHardware, hardware_interface::SystemInterface);
-
-
-

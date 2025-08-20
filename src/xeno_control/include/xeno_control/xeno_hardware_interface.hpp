@@ -8,9 +8,12 @@
 
 using hardware_interface::return_type;
 
-namespace xeno_control {
-  struct Joint {
-    Joint() {
+namespace xeno_control
+{
+  struct Joint
+  {
+    Joint()
+    {
       position = 0.0;
       velocity = 0.0;
       command = 0.0;
@@ -21,36 +24,27 @@ namespace xeno_control {
     double command;
   };
 
-  class XenoHardware : public hardware_interface::SystemInterface {
+  class XenoHardware final : public hardware_interface::SystemInterface
+  {
   public:
-    CallbackReturn on_init(const hardware_interface::HardwareInfo &info) override;
+    CallbackReturn on_init(const hardware_interface::HardwareInfo& info) override;
 
-    std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
+    CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) override;
 
-    std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
+    CallbackReturn on_deactivate(const rclcpp_lifecycle::State& previous_state) override;
 
-    CallbackReturn on_activate(const rclcpp_lifecycle::State &previous_state) override;
+    return_type read(const rclcpp::Time& time, const rclcpp::Duration& period) override;
 
-    CallbackReturn on_deactivate(const rclcpp_lifecycle::State &previous_state) override;
-
-    return_type read(const rclcpp::Time &time, const rclcpp::Duration &period) override;
-
-    return_type write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) override;
+    return_type write(const rclcpp::Time& /*time*/, const rclcpp::Duration& /*period*/) override;
 
   private:
     Joint joints[8];
 
-    double read_motor_position(const int joint_id) const {
-      return joints[joint_id].position;
-    }
+    double read_motor_position(int joint_id) const;
 
-    double read_motor_velocity(const int joint_id) const {
-      return joints[joint_id].velocity;
-    }
+    double read_motor_velocity(int joint_id) const;
 
-    void write_motor_position(const int joint_id, const double position) {
-      joints[joint_id].position = position;
-    }
+    void write_motor_position(int joint_id, double position);
   };
 }
 
