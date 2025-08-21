@@ -17,6 +17,26 @@ Result xeno_control::Arm::posVelControl(const uint8_t id, const float position, 
     return j4310_array_[id]->posVelControl(position, velocity);
 }
 
+tl::expected<void, OneMotor::Error> xeno_control::Arm::enable()
+{
+    for (const auto& motor : j4310_array_)
+    {
+        auto result = motor->enable();
+        if (!result) return result;
+    }
+    return {};
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Arm::disable()
+{
+    for (const auto& motor : j4310_array_)
+    {
+        auto result = motor->disable();
+        if (!result) return result;
+    }
+    return {};
+}
+
 xeno_control::Arm::Arm()
 {
     driver_ = std::make_unique<CanDriver>("can0");

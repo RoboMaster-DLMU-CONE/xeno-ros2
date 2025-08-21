@@ -43,7 +43,9 @@ rosdep install --from-paths src --ignore-src -r -y
 编译之前请确保您已位于工作目录的`根目录`下。
 
 ```shell
-colcon build --symlink-install
+colcon build
+# 使用-DXENO_CONTROL_SIMULATE=ON编译模拟运行的程序
+# colcon build --cmake-args -DXENO_CONTROL_SIMULATE=ON
 ```
 
 ### 测试
@@ -104,5 +106,4 @@ ros2 launch xeno_moveit move_group.launch.py
 
 ## TODO
 
-- [ ] 接入Linux-Motor-Drivers
 - [ ] 实机调参

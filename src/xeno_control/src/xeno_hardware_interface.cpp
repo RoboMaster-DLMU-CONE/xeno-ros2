@@ -23,27 +23,39 @@ namespace xeno_control
   CallbackReturn XenoHardware::on_activate(const rclcpp_lifecycle::State& previous_state)
   {
     // 激活硬件接口
-#ifdef XENO_CONTROL_SIMULATE
-#endif
     (void)previous_state;
+#ifdef XENO_CONTROL_SIMULATE
     return CallbackReturn::SUCCESS;
+#else
+    return Lift::getInstance().enable()
+                              .and_then([] { return Arm::getInstance().enable(); })
+                              .map([] { return CallbackReturn::SUCCESS; })
+                              .value_or(CallbackReturn::ERROR);
+
+#endif
   }
 
   CallbackReturn XenoHardware::on_deactivate(const rclcpp_lifecycle::State& previous_state)
   {
+    (void)previous_state;
 #ifdef XENO_CONTROL_SIMULATE
     // 停用硬件接口
-    (void)previous_state;
     return CallbackReturn::SUCCESS;
+#else
+    return Lift::getInstance().disable()
+                              .and_then([] { return Arm::getInstance().disable(); })
+                              .map([] { return CallbackReturn::SUCCESS; })
+                              .value_or(CallbackReturn::ERROR);
 #endif
   }
 
   return_type XenoHardware::read(const rclcpp::Time& time, const rclcpp::Duration& period)
   {
     // 从硬件读取电机位置和速度
-#ifdef XENO_CONTROL_SIMULATE
     (void)time;
     (void)period;
+#ifdef XENO_CONTROL_SIMULATE
+
     for (int i = 1; i <= 6; i++)
     {
       joints[i].position = read_motor_position(i);
