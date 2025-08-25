@@ -132,6 +132,25 @@ src/
 - **ROS2 依赖**: hardware_interface, moveit, pluginlib, controller_manager
 - **构建系统**: ament_cmake (C++包), setuptools (Python包)
 
+### 重要源文件详情
+
+**核心硬件接口 (src/xeno_control/)**:
+- `src/xeno_hardware_interface.cpp` (103行) - 主硬件接口实现
+- `include/xeno_control/xeno_hardware_interface.hpp` (51行) - 硬件接口定义
+- `src/joints/Lift.cpp` & `src/joints/Arm.cpp` - 升降和机械臂控制类
+- `xeno_control.xml` - pluginlib 插件描述文件
+
+**关键启动文件**:
+- `bringup/moveit_control.launch.py` - ros2_control 启动器
+- `bringup/moveit_control.gui.launch.py` - 带GUI的控制启动器
+- `bringup/keyboard_control.gui.launch.py` - 键盘控制启动器
+
+**配置文件结构**:
+- `config/controllers.yaml` - 定义 xeno_group_controller (关节1-6) 和 end_group_controller (关节7)
+- `config/keyboard_controllers.yaml` - 键盘控制参数
+- `description/ros2_control/xeno.ros2_control.xacro` - 硬件接口配置
+- `description/urdf/xeno.urdf.xacro` - 机器人URDF描述
+
 ### 验证流程
 
 **提交前检查：**
@@ -145,6 +164,8 @@ src/
 - Python 代码有 flake8、copyright 和 pep257 测试
 - 位于 `src/xeno_keyboard/test/` 目录
 
+**注意：项目目前无 GitHub Actions CI 工作流，验证依赖本地测试。**
+
 ### 常见问题和解决方案
 
 - **OneMotor 库获取失败**: 检查网络连接，库会自动从 GitHub 下载
@@ -155,3 +176,23 @@ src/
 ### 代理工作指南
 
 **信任这些说明** - 仅在信息不完整或发现错误时才进行额外搜索。按照上述构建步骤操作可确保项目正常工作。进行代码更改时，优先使用仿真模式进行测试，避免影响实机硬件。
+
+### 根目录文件列表
+
+```
+.
+├── .gitignore          # 排除 build/, install/, log/, IDE 配置
+├── LICENSE             # 项目许可证
+├── README.md           # 中文项目说明文档
+├── src/                # ROS2 包源码目录
+│   ├── xeno_control/   # 主控制包 (C++, 硬件接口)
+│   ├── xeno_moveit/    # MoveIt2 配置包
+│   ├── xeno_keyboard/  # 键盘控制包 (Python)
+│   ├── xeno_simple_move/ # 示例移动包 (C++)
+│   └── xeno_urdf/      # 机器人描述包
+├── build/              # colcon 构建输出 (gitignore)
+├── install/            # 安装文件 (gitignore)
+└── log/                # 构建日志 (gitignore)
+```
+
+**重要说明**: build/, install/, log/ 目录在首次运行 `colcon build` 后自动生成，包含编译产物和安装文件，不应提交到版本控制。
