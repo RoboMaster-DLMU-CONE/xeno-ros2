@@ -1,10 +1,7 @@
 #include "xeno_control/joints/Arm.hpp"
 
-#include <stdexcept>
-
 using OneMotor::Motor::DM::J4310;
 using OneMotor::Can::CanDriver;
-using Result = tl::expected<void, OneMotor::Error>;
 
 xeno_control::Arm& xeno_control::Arm::getInstance()
 {
@@ -12,44 +9,46 @@ xeno_control::Arm& xeno_control::Arm::getInstance()
     return _instance;
 }
 
-Result xeno_control::Arm::posVelControl(const uint8_t id, const float position, const float velocity) const
+tl::expected<void, OneMotor::Error> xeno_control::Arm::posVelControl(const uint8_t id, const float position,
+                                                                     const float velocity) const
 {
-    return j4310_array_[id]->posVelControl(position, velocity);
-}
-
-tl::expected<void, OneMotor::Error> xeno_control::Arm::enable()
-{
-    for (const auto& motor : j4310_array_)
-    {
-        auto result = motor->enable();
-        if (!result) return result;
-    }
-    return {};
-}
-
-tl::expected<void, OneMotor::Error> xeno_control::Arm::disable()
-{
-    for (const auto& motor : j4310_array_)
-    {
-        auto result = motor->disable();
-        if (!result) return result;
-    }
-    return {};
+    return j4310_array_[id - 1]->posVelControl(position, velocity);
 }
 
 xeno_control::Arm::Arm()
 {
     driver_ = std::make_unique<CanDriver>("can0");
-    if (const auto result = driver_->open(); !result)
+    (void)driver_->open().or_else([](const auto& e)
     {
-        throw std::runtime_error(result.error().message);
-    }
+        throw std::runtime_error(e.message);
+    });
     for (int i = 0; i < 3; i++)
     {
         j4310_array_[i] = std::make_unique<J4310>(*driver_, 0x51 + i, 0x41 + i);
-        auto result = j4310_array_[i]->setZeroPosition();
-        if (!result) throw std::runtime_error(result.error().message);
+        (void)j4310_array_[i]->enable().and_then([&] { return j4310_array_[i]->setZeroPosition(); });
     }
 }
 
 xeno_control::Arm::~Arm() = default;
+
+tl::expected<void, OneMotor::Error> xeno_control::Arm::enable()
+{
+    auto result = j4310_array_[0]->enable();
+    for (int i = 1; i < 3; i++)
+    {
+        result = result.and_then([this, i] { return j4310_array_[i]->enable(); });
+        if (!result) break;
+    }
+    return result;
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Arm::disable()
+{
+    auto result = j4310_array_[0]->disable();
+    for (int i = 1; i < 3; i++)
+    {
+        result = result.and_then([this, i] { return j4310_array_[i]->disable(); });
+        if (!result) break;
+    }
+    return result;
+}
