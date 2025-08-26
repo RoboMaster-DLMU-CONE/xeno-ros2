@@ -102,6 +102,18 @@ ros2 launch xeno_control moveit_control.launch.py
 ros2 launch xeno_moveit move_group.launch.py
 ```
 
+### 电机保护
+
+项目包含`xeno_control_guard`包，使用OneMotor的MotorGuard类来保护CAN总线上的电机。当通信丢失时，会自动发送安全帧来停止电机。
+
+```shell
+# 启动电机保护节点
+ros2 launch xeno_control_guard xeno_control_guard.launch.py
+
+# 同时启动保护和控制系统
+ros2 launch xeno_control_guard xeno_control_guard_with_control.launch.py start_control:=true
+```
+
 ## 开发指南
 
 ## TODO
