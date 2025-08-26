@@ -14,6 +14,9 @@ public:
     {
         RCLCPP_INFO(this->get_logger(), "Initializing Xeno Control Guard Node");
         
+#ifdef XENO_CONTROL_SIMULATE
+        RCLCPP_WARN(this->get_logger(), "Running in SIMULATION mode - MotorGuard is disabled");
+#else
         // Prepare exit frame data - when motors lose communication, send all zeros to stop them
         std::array<uint8_t, 16> exit_frame_data{};
         std::fill(exit_frame_data.begin(), exit_frame_data.end(), 0x00);
@@ -38,6 +41,7 @@ public:
             RCLCPP_ERROR(this->get_logger(), "Failed to start MotorGuard: %s", e.what());
             throw;
         }
+#endif
         
         // Create a timer to periodically log status
         status_timer_ = this->create_wall_timer(
@@ -47,8 +51,13 @@ public:
 private:
     void status_callback()
     {
+#ifdef XENO_CONTROL_SIMULATE
+        RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 30000, 
+                           "Motor guard running in simulation mode - hardware protection disabled");
+#else
         RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 30000, 
                            "Motor guard active - protecting can0 and can1 interfaces");
+#endif
     }
     
     rclcpp::TimerBase::SharedPtr status_timer_;

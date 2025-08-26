@@ -12,8 +12,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 
-# Include OneMotor from the existing xeno_control package
-include(../xeno_control/cmake/findOneMotor.cmake)
+option(XENO_CONTROL_SIMULATE "Run Xeno Control node with simulation" OFF)
+
+# Include OneMotor - first try to find it, then fetch if needed
+include(FetchContent)
+find_package(OneMotor QUIET)
+
+if (NOT OneMotor_FOUND)
+    message(STATUS "本地未找到 OneMotor 包，尝试从 GitHub 获取...")
+    FetchContent_Declare(
+            OneMotor_fetched
+            GIT_REPOSITORY "https://github.com/RoboMaster-DLMU-CONE/OneMotor"
+            GIT_TAG "main"
+    )
+    FetchContent_MakeAvailable(OneMotor_fetched)
+else ()
+    message(STATUS "已找到 OneMotor 版本 ${OneMotor_VERSION}")
+endif ()
 
 add_executable(xeno_control_guard_node src/xeno_control_guard_node.cpp)
 target_include_directories(xeno_control_guard_node PUBLIC
@@ -27,6 +42,11 @@ ament_target_dependencies(
 
 # Link OneMotor library
 target_link_libraries(xeno_control_guard_node PRIVATE OneMotor::OneMotor)
+
+# Add simulation compile definition if enabled
+if (XENO_CONTROL_SIMULATE)
+    target_compile_definitions(xeno_control_guard_node PRIVATE XENO_CONTROL_SIMULATE)
+endif ()
 
 install(TARGETS xeno_control_guard_node
   DESTINATION lib/${PROJECT_NAME})
