@@ -52,3 +52,51 @@ tl::expected<void, OneMotor::Error> xeno_control::Arm::disable()
     }
     return result;
 }
+
+tl::expected<float, OneMotor::Error> xeno_control::Arm::getPosition(const uint8_t id) const
+{
+    if (id < 1 || id > 3) {
+        return tl::unexpected(OneMotor::Error{"Invalid joint ID for Arm"});
+    }
+    return j4310_array_[id - 1]->getPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Arm::getVelocity(const uint8_t id) const
+{
+    if (id < 1 || id > 3) {
+        return tl::unexpected(OneMotor::Error{"Invalid joint ID for Arm"});
+    }
+    return j4310_array_[id - 1]->getVelocity();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Arm::getCalibrationPosition(const uint8_t id) const
+{
+    if (id < 1 || id > 3) {
+        return tl::unexpected(OneMotor::Error{"Invalid joint ID for Arm"});
+    }
+    return j4310_array_[id - 1]->getCalibrationPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Arm::getCalibrationVelocity(const uint8_t id) const
+{
+    if (id < 1 || id > 3) {
+        return tl::unexpected(OneMotor::Error{"Invalid joint ID for Arm"});
+    }
+    return j4310_array_[id - 1]->getCalibrationVelocity();
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Arm::setCalibrationPosition(const uint8_t id, const float position)
+{
+    if (id < 1 || id > 3) {
+        return tl::unexpected(OneMotor::Error{"Invalid joint ID for Arm"});
+    }
+    return j4310_array_[id - 1]->setCalibrationPosition(position);
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Arm::setCalibrationVelocity(const uint8_t id, const float velocity)
+{
+    if (id < 1 || id > 3) {
+        return tl::unexpected(OneMotor::Error{"Invalid joint ID for Arm"});
+    }
+    return j4310_array_[id - 1]->setCalibrationVelocity(velocity);
+}

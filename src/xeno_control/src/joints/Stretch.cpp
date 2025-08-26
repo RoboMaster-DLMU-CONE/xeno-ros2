@@ -67,3 +67,35 @@ tl::expected<void, OneMotor::Error> xeno_control::Stretch::disable()
     return m3508_1->disable()
                   .and_then([this] { return m3508_2->disable(); });
 }
+
+tl::expected<float, OneMotor::Error> xeno_control::Stretch::getPosition() const
+{
+    return m3508_1->getPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Stretch::getVelocity() const
+{
+    return m3508_1->getVelocity();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Stretch::getCalibrationPosition() const
+{
+    return m3508_1->getCalibrationPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Stretch::getCalibrationVelocity() const
+{
+    return m3508_1->getCalibrationVelocity();
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Stretch::setCalibrationPosition(const float position)
+{
+    return m3508_1->setCalibrationPosition(position)
+                  .and_then([this, position] { return m3508_2->setCalibrationPosition(-position); });
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Stretch::setCalibrationVelocity(const float velocity)
+{
+    return m3508_1->setCalibrationVelocity(velocity)
+                  .and_then([this, velocity] { return m3508_2->setCalibrationVelocity(-velocity); });
+}

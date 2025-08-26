@@ -55,3 +55,33 @@ tl::expected<void, OneMotor::Error> xeno_control::Suck::disable()
 {
     return m3508_->disable();
 }
+
+tl::expected<float, OneMotor::Error> xeno_control::Suck::getPosition() const
+{
+    return m3508_->getPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Suck::getVelocity() const
+{
+    return m3508_->getVelocity();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Suck::getCalibrationPosition() const
+{
+    return m3508_->getCalibrationPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Suck::getCalibrationVelocity() const
+{
+    return m3508_->getCalibrationVelocity();
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Suck::setCalibrationPosition(const float position)
+{
+    return m3508_->setCalibrationPosition(position);
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Suck::setCalibrationVelocity(const float velocity)
+{
+    return m3508_->setCalibrationVelocity(velocity);
+}

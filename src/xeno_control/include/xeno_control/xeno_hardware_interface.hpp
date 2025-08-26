@@ -37,6 +37,12 @@ namespace xeno_control
 
     return_type write(const rclcpp::Time& /*time*/, const rclcpp::Duration& /*period*/) override;
 
+    // Methods for accessing calibration values
+    bool getCalibrationPosition(int joint_id, double& position) const;
+    bool getCalibrationVelocity(int joint_id, double& velocity) const;
+    bool setCalibrationPosition(int joint_id, double position);
+    bool setCalibrationVelocity(int joint_id, double velocity);
+
   private:
     Joint joints[8];
 

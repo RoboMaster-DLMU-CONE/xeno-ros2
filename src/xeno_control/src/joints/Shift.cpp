@@ -56,3 +56,33 @@ tl::expected<void, OneMotor::Error> xeno_control::Shift::disable()
 {
     return m3508_->disable();
 }
+
+tl::expected<float, OneMotor::Error> xeno_control::Shift::getPosition() const
+{
+    return m3508_->getPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Shift::getVelocity() const
+{
+    return m3508_->getVelocity();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Shift::getCalibrationPosition() const
+{
+    return m3508_->getCalibrationPosition();
+}
+
+tl::expected<float, OneMotor::Error> xeno_control::Shift::getCalibrationVelocity() const
+{
+    return m3508_->getCalibrationVelocity();
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Shift::setCalibrationPosition(const float position)
+{
+    return m3508_->setCalibrationPosition(position);
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Shift::setCalibrationVelocity(const float velocity)
+{
+    return m3508_->setCalibrationVelocity(velocity);
+}
