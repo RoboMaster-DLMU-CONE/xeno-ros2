@@ -68,7 +68,7 @@ namespace xeno_control
         (void)time;
         (void)period;
 #ifdef XENO_CONTROL_SIMULATE
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 7; i++)
         {
             joints[i].position = read_motor_position(i);
             joints[i].velocity = read_motor_velocity(i);
@@ -119,7 +119,7 @@ namespace xeno_control
 #ifdef XENO_CONTROL_SIMULATE
         (void)time;
         (void)period;
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 7; i++)
         {
             write_motor_position(i, joints[i].command);
         }
