@@ -8,7 +8,9 @@ namespace xeno_control
     class Arm
     {
     public:
-        static Arm& getInstance();
+        Arm();
+        void init(OneMotor::Can::CanDriver& driver);
+
         [[nodiscard]] tl::expected<void, OneMotor::Error> posVelControl(uint8_t id, float position,
                                                                         float velocity) const;
         tl::expected<void, OneMotor::Error> enable();
@@ -18,8 +20,6 @@ namespace xeno_control
         ~Arm();
 
     private:
-        Arm();
-        std::unique_ptr<OneMotor::Can::CanDriver> driver_;
         std::array<std::unique_ptr<OneMotor::Motor::DM::J4310>, 3> j4310_array_;
     };
 }

@@ -7,14 +7,28 @@ using hardware_interface::return_type;
 
 namespace xeno_control
 {
+  XenoHardware::XenoHardware()
+  {
+    base_driver = std::make_unique<OneMotor::Can::CanDriver>("can0");
+    arm_driver = std::make_unique<OneMotor::Can::CanDriver>("can1");
+    lift = std::make_unique<Lift>();
+    arm = std::make_unique<Arm>();
+    stretch = std::make_unique<Stretch>();
+    shift = std::make_unique<Shift>();
+    suck = std::make_unique<Suck>();
+  }
+
   CallbackReturn XenoHardware::on_init(const hardware_interface::HardwareInfo& info)
   {
     // 初始化硬件接口
     // 例如，连接到电机控制器
 #ifdef XENO_CONTROL_SIMULATE
 #else
-    Lift::getInstance();
-    Arm::getInstance();
+    lift->init(*base_driver);
+    arm->init(*arm_driver);
+    stretch->init(*base_driver);
+    shift->init(*base_driver);
+    suck->init(*base_driver);
 #endif
     (void)info;
     return CallbackReturn::SUCCESS;
@@ -27,11 +41,10 @@ namespace xeno_control
 #ifdef XENO_CONTROL_SIMULATE
     return CallbackReturn::SUCCESS;
 #else
-    return Lift::getInstance().enable()
-                              .and_then([] { return Arm::getInstance().enable(); })
-                              .map([] { return CallbackReturn::SUCCESS; })
-                              .value_or(CallbackReturn::ERROR);
-
+    return lift->enable()
+                .and_then([this] { return arm->enable(); })
+                .map([] { return CallbackReturn::SUCCESS; })
+                .value_or(CallbackReturn::ERROR);
 #endif
   }
 
@@ -42,10 +55,10 @@ namespace xeno_control
     // 停用硬件接口
     return CallbackReturn::SUCCESS;
 #else
-    return Lift::getInstance().disable()
-                              .and_then([] { return Arm::getInstance().disable(); })
-                              .map([] { return CallbackReturn::SUCCESS; })
-                              .value_or(CallbackReturn::ERROR);
+    return lift->disable()
+                .and_then([this] { return arm->disable(); })
+                .map([] { return CallbackReturn::SUCCESS; })
+                .value_or(CallbackReturn::ERROR);
 #endif
   }
 

@@ -24,12 +24,6 @@ static constexpr PID_Params<float> ANG_DEFAULT_PARAMS{
     .IntegralLimit = 1500,
 };
 
-xeno_control::Lift& xeno_control::Lift::getInstance()
-{
-    static Lift _instance;
-    return _instance;
-}
-
 tl::expected<void, OneMotor::Error> xeno_control::Lift::disable()
 {
     return m3508_1->disable().and_then([&]
@@ -54,11 +48,18 @@ void xeno_control::Lift::posAngControl(const float pos, const float ang) const n
     m3508_2->setAngRef(ang);
 }
 
-xeno_control::Lift::Lift()
+xeno_control::Lift::Lift() = default;
+
+void xeno_control::Lift::init(CanDriver& driver)
 {
-    driver_ = std::make_unique<CanDriver>("can1");
-    m3508_1 = std::make_unique<M3508<3, Position>>(*driver_, POS_DEFAULT_PARAMS, ANG_DEFAULT_PARAMS);
-    m3508_2 = std::make_unique<M3508<4, Position>>(*driver_, POS_DEFAULT_PARAMS, ANG_DEFAULT_PARAMS);
+    m3508_1 = std::make_unique<M3508<3, Position>>(driver, POS_DEFAULT_PARAMS, ANG_DEFAULT_PARAMS);
+    m3508_2 = std::make_unique<M3508<4, Position>>(driver, POS_DEFAULT_PARAMS, ANG_DEFAULT_PARAMS);
+    (void)m3508_1->enable()
+                  .and_then([this] { return m3508_2->enable(); })
+                  .or_else([](const auto& e) -> tl::expected<void, OneMotor::Error>
+                   {
+                       throw std::runtime_error(e.message);
+                   });
 }
 
 xeno_control::Lift::~Lift() = default;

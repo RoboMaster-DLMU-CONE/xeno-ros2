@@ -5,6 +5,12 @@
 #include <hardware_interface/types/hardware_interface_type_values.hpp>
 #include <rclcpp/rclcpp.hpp>
 
+#include "joints/Arm.hpp"
+#include "joints/Lift.hpp"
+#include "joints/Stretch.hpp"
+#include "joints/Shift.hpp"
+#include "joints/Suck.hpp"
+
 
 using hardware_interface::return_type;
 
@@ -27,6 +33,7 @@ namespace xeno_control
   class XenoHardware final : public hardware_interface::SystemInterface
   {
   public:
+    XenoHardware();
     CallbackReturn on_init(const hardware_interface::HardwareInfo& info) override;
 
     CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) override;
@@ -45,6 +52,15 @@ namespace xeno_control
     double read_motor_velocity(int joint_id) const;
 
     void write_motor_position(int joint_id, double position);
+
+    std::unique_ptr<OneMotor::Can::CanDriver> base_driver;
+    std::unique_ptr<OneMotor::Can::CanDriver> arm_driver;
+
+    std::unique_ptr<Lift> lift;
+    std::unique_ptr<Arm> arm;
+    std::unique_ptr<Stretch> stretch;
+    std::unique_ptr<Shift> shift;
+    std::unique_ptr<Suck> suck;
   };
 }
 
