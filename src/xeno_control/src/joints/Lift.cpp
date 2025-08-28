@@ -40,12 +40,16 @@ tl::expected<void, OneMotor::Error> xeno_control::Lift::enable()
     });
 }
 
-void xeno_control::Lift::posAngControl(const float pos, const float ang) const noexcept
+void xeno_control::Lift::writeCommand(const float command) noexcept
 {
-    m3508_1->setPosRef(-pos);
-    m3508_1->setAngRef(-ang);
-    m3508_2->setPosRef(pos);
-    m3508_2->setAngRef(ang);
+    m3508_1->setPosRef(command);
+    m3508_2->setPosRef(-command);
+}
+
+std::pair<float, float> xeno_control::Lift::readAngPos() const noexcept
+{
+    auto status = m3508_1->getStatus();
+    return {status.angular, status.total_angle};
 }
 
 xeno_control::Lift::Lift() = default;
@@ -60,6 +64,8 @@ void xeno_control::Lift::init(CanDriver& driver)
                    {
                        throw std::runtime_error(e.message);
                    });
+    m3508_1->setAngRef(80);
+    m3508_2->setAngRef(80);
 }
 
 xeno_control::Lift::~Lift() = default;

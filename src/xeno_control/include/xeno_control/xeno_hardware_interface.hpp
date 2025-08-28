@@ -2,7 +2,6 @@
 #define XENO_HARDWARE_HPP_
 
 #include <hardware_interface/system_interface.hpp>
-#include <hardware_interface/types/hardware_interface_type_values.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 #include "joints/Arm.hpp"
@@ -34,6 +33,7 @@ namespace xeno_control
   {
   public:
     XenoHardware();
+    ~XenoHardware() override;
     CallbackReturn on_init(const hardware_interface::HardwareInfo& info) override;
 
     CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) override;
@@ -47,20 +47,24 @@ namespace xeno_control
   private:
     Joint joints[8];
 
+#ifdef XENO_CONTROL_SIMULATE
+
     double read_motor_position(int joint_id) const;
 
     double read_motor_velocity(int joint_id) const;
 
     void write_motor_position(int joint_id, double position);
 
-    std::unique_ptr<OneMotor::Can::CanDriver> base_driver;
-    std::unique_ptr<OneMotor::Can::CanDriver> arm_driver;
+#else
+    OneMotor::Can::CanDriver* base_driver;
+    OneMotor::Can::CanDriver* arm_driver;
 
-    std::unique_ptr<Lift> lift;
-    std::unique_ptr<Arm> arm;
-    std::unique_ptr<Stretch> stretch;
-    std::unique_ptr<Shift> shift;
-    std::unique_ptr<Suck> suck;
+    Lift* lift;
+    Arm* arm;
+    Stretch* stretch;
+    Shift* shift;
+    Suck* suck;
+#endif
   };
 }
 

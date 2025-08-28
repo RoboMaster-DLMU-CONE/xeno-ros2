@@ -24,12 +24,6 @@ static constexpr PID_Params<float> ANG_DEFAULT_PARAMS{
     .IntegralLimit = 2000,
 };
 
-void xeno_control::Suck::posAngControl(const float pos, const float ang) const
-{
-    m3508_->setPosRef(pos);
-    m3508_->setAngRef(ang);
-}
-
 xeno_control::Suck::Suck() = default;
 
 void xeno_control::Suck::init(CanDriver& driver)
@@ -39,4 +33,26 @@ void xeno_control::Suck::init(CanDriver& driver)
     {
         throw std::runtime_error(e.message);
     });
+    m3508_->setAngRef(50);
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Suck::enable()
+{
+    return m3508_->enable();
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Suck::disable()
+{
+    return m3508_->disable();
+}
+
+void xeno_control::Suck::writeCommand(const float command) noexcept
+{
+    m3508_->setPosRef(command);
+}
+
+std::pair<float, float> xeno_control::Suck::readAngPos() const noexcept
+{
+    auto status = m3508_->getStatus();
+    return {status.angular, status.total_angle};
 }

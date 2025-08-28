@@ -10,7 +10,10 @@ namespace xeno_control
     public:
         Shift();
         void init(OneMotor::Can::CanDriver& driver);
-        void posAngControl(float pos, float ang) const;
+        tl::expected<void, OneMotor::Error> enable();
+        tl::expected<void, OneMotor::Error> disable();
+        void writeCommand(float command) noexcept;
+        std::pair<float, float> readAngPos() const noexcept;
         Shift(Shift&) = delete;
         Shift& operator=(const Shift&) = delete;
         ~Shift() = default;

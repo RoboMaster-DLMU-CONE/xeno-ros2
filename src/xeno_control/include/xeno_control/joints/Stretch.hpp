@@ -10,9 +10,13 @@ namespace xeno_control
     public:
         Stretch();
         void init(OneMotor::Can::CanDriver& driver);
+        tl::expected<void, OneMotor::Error> enable();
+        tl::expected<void, OneMotor::Error> disable();
+        void writeCommand(float command) noexcept;
+        std::pair<float, float> readAngPos() const noexcept;
+
         Stretch(Stretch&) = delete;
-        Stretch& operator=(const Stretch&) = delete;
-        void posAngControl(float pos, float ang) const;
+        Stretch& operator =(const Stretch&) = delete;
 
     private:
         std::unique_ptr<OneMotor::Motor::DJI::M3508<1, OneMotor::Motor::DJI::MotorMode::Position>> m3508_1;

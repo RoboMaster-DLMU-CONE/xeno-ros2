@@ -15,9 +15,15 @@ namespace xeno_control
                                                                         float velocity) const;
         tl::expected<void, OneMotor::Error> enable();
         tl::expected<void, OneMotor::Error> disable();
+
+        void writeCommand(float command, uint8_t id) noexcept;
+
         Arm(Arm&) = delete;
         Arm& operator=(const Arm&) = delete;
         ~Arm();
+
+        std::array<float, 3> pos{};
+        std::array<float, 3> ang{};
 
     private:
         std::array<std::unique_ptr<OneMotor::Motor::DM::J4310>, 3> j4310_array_;

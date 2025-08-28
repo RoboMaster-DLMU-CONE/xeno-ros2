@@ -10,8 +10,11 @@ namespace xeno_control
     public:
         Suck();
         void init(OneMotor::Can::CanDriver& driver);
+        tl::expected<void, OneMotor::Error> enable();
+        tl::expected<void, OneMotor::Error> disable();
+        void writeCommand(float command) noexcept;
+        std::pair<float, float> readAngPos() const noexcept;
         Suck(Suck&) = delete;
-        void posAngControl(float pos, float ang) const;
         Suck& operator=(const Suck&) = delete;
 
     private:

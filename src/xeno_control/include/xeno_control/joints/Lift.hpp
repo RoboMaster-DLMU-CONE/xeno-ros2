@@ -13,7 +13,8 @@ namespace xeno_control
         void init(OneMotor::Can::CanDriver& driver);
         tl::expected<void, OneMotor::Error> disable();
         tl::expected<void, OneMotor::Error> enable();
-        void posAngControl(float pos, float ang) const noexcept;
+        void writeCommand(float command) noexcept;
+        std::pair<float, float> readAngPos() const noexcept;
         Lift(Lift&) = delete;
         Lift& operator=(const Lift&) = delete;
         ~Lift();

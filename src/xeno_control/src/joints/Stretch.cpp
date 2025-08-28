@@ -24,14 +24,6 @@ static constexpr PID_Params<float> ANG_DEFAULT_PARAMS{
     .IntegralLimit = 4000,
 };
 
-void xeno_control::Stretch::posAngControl(const float pos, const float ang) const
-{
-    m3508_1->setPosRef(pos);
-    m3508_1->setAngRef(ang);
-    m3508_2->setPosRef(-pos);
-    m3508_2->setAngRef(-ang);
-}
-
 xeno_control::Stretch::Stretch() = default;
 
 void xeno_control::Stretch::init(CanDriver& driver)
@@ -44,4 +36,30 @@ void xeno_control::Stretch::init(CanDriver& driver)
                    {
                        throw std::runtime_error(e.message);
                    });
+    m3508_1->setAngRef(80);
+    m3508_2->setAngRef(80);
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Stretch::enable()
+{
+    return m3508_1->enable()
+                   .and_then([this] { return m3508_2->enable(); });
+}
+
+tl::expected<void, OneMotor::Error> xeno_control::Stretch::disable()
+{
+    return m3508_1->disable()
+                   .and_then([this] { return m3508_2->disable(); });
+}
+
+void xeno_control::Stretch::writeCommand(const float command) noexcept
+{
+    m3508_1->setPosRef(command);
+    m3508_2->setPosRef(-command);
+}
+
+std::pair<float, float> xeno_control::Stretch::readAngPos() const noexcept
+{
+    auto status = m3508_1->getStatus();
+    return {status.angular, status.total_angle};
 }
