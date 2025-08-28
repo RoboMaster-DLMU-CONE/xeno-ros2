@@ -44,6 +44,7 @@ endif ()
 
 add_library(xeno_control SHARED
         src/xeno_hardware_interface.cpp
+        src/joints/CanDriverManager.cpp
         src/joints/Arm.cpp
         src/joints/Lift.cpp
         src/joints/Shift.cpp
