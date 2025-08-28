@@ -17,18 +17,17 @@ public:
 #ifdef XENO_CONTROL_SIMULATE
         RCLCPP_WARN(this->get_logger(), "Running in SIMULATION mode - MotorGuard is disabled");
 #else
-        // Prepare exit frame data - when motors lose communication, send all zeros to stop them
         std::array<uint8_t, 16> exit_frame_data{};
-        std::fill(exit_frame_data.begin(), exit_frame_data.end(), 0x00);
+        std::ranges::fill(exit_frame_data, 0x00);
         
-        // Setup MotorGuard for both CAN interfaces
+        // Setup MotorGuard for both CAN interface
         std::vector<OneMotor::Motor::DJI::MotorGuard::DriverPair> driver_set;
         
         // Add can0 interface with exit frame data
-        driver_set.push_back({"can0", exit_frame_data});
+        driver_set.emplace_back("can0", exit_frame_data);
         
         // Add can1 interface with exit frame data  
-        driver_set.push_back({"can1", exit_frame_data});
+        driver_set.emplace_back("can1", exit_frame_data);
         
         // Start the motor guard protection
         try 
@@ -45,7 +44,7 @@ public:
         
         // Create a timer to periodically log status
         status_timer_ = this->create_wall_timer(
-            10s, std::bind(&XenoControlGuardNode::status_callback, this));
+            10s, [this] { status_callback(); });
     }
 
 private:

@@ -41,7 +41,7 @@ ament_target_dependencies(
 )
 
 # Link OneMotor library
-target_link_libraries(xeno_control_guard_node PRIVATE OneMotor::OneMotor)
+target_link_libraries(xeno_control_guard_node OneMotor::OneMotor)
 
 # Add simulation compile definition if enabled
 if (XENO_CONTROL_SIMULATE)
